@@ -182,11 +182,4 @@ Cambia esta línea si lo necesitas:
 const API_BASE_URL = 'http://localhost:8000';
 ```
 
-## Notas / Problemas conocidos
 
-- En `frontend/index.html` el `<link>` del CSS apunta a `css/styles.css`, pero el archivo existente es `frontend/css/style.css`. Si no ves estilos, revisa esa ruta.
-- La API carga todo `recommendations_api.json` en memoria al iniciar; si el JSON es muy grande, considera reducir `top-n` o generar un subset.
-
-## Licencia
-
-No especificada.
