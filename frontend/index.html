@@ -1,0 +1,147 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>MovieRecs - Sistema de Recomendación de Películas</title>
+    <link rel="stylesheet" href="css/styles.css">
+    <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+</head>
+<body>
+    <!-- Header -->
+    <header class="header">
+        <div class="container">
+            <div class="header-content">
+                <div class="logo">
+                    <span class="logo-icon">🎬</span>
+                    <span class="logo-text">MovieRecs</span>
+                </div>
+                <div class="header-info">
+                    <span class="api-status" id="apiStatus">
+                        <span class="status-dot"></span>
+                        Verificando API...
+                    </span>
+                </div>
+            </div>
+        </div>
+    </header>
+
+    <!-- Hero Section -->
+    <section class="hero">
+        <div class="container">
+            <h1>Recomendaciones de Películas</h1>
+            <p>Sistema basado en clusters con Apache Spark | MovieLens 1M</p>
+        </div>
+    </section>
+
+    <!-- Main Content -->
+    <main class="main">
+        <div class="container">
+            <!-- Search Card -->
+            <div class="card search-card">
+                <h2>🔍 Buscar Recomendaciones</h2>
+                <div class="search-form">
+                    <div class="form-group">
+                        <label for="userId">ID de Usuario</label>
+                        <input type="number" id="userId" placeholder="Ej: 1, 2, 3..." value="1">
+                    </div>
+                    <div class="form-actions">
+                        <button class="btn btn-primary" onclick="searchUser()">
+                            <span class="btn-icon">🔍</span>
+                            Buscar
+                        </button>
+                        <button class="btn btn-secondary" onclick="randomUser()">
+                            <span class="btn-icon">🎲</span>
+                            Aleatorio
+                        </button>
+                        <button class="btn btn-info" onclick="loadAllUsers()">
+                            <span class="btn-icon">📋</span>
+                            Todos los Usuarios
+                        </button>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Stats Section -->
+            <div id="statsContainer"></div>
+
+            <!-- User Result Card -->
+            <div class="card result-card" id="resultCard" style="display: none;">
+                <div id="resultContent"></div>
+            </div>
+
+            <!-- All Users Card -->
+            <div class="card all-users-card" id="allUsersCard" style="display: none;">
+                <h2>📋 Todos los Usuarios</h2>
+                <div id="allUsersContent"></div>
+            </div>
+        </div>
+    </main>
+
+    <!-- Footer -->
+    <footer class="footer">
+        <div class="container">
+            <p>&copy; 2025 MovieRecs - Sistema de Recomendación con Apache Spark</p>
+            <p class="footer-links">
+                <a href="#" onclick="showInfo()">📖 Acerca de</a>
+                <a href="#" onclick="showDocs()">📚 Documentación API</a>
+            </p>
+        </div>
+    </footer>
+
+    <!-- Modal para información -->
+    <div id="infoModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeModal()">&times;</span>
+            <h2>📖 Acerca del Sistema</h2>
+            <p><strong>MovieRecs</strong> es un sistema de recomendación de películas basado en clusters generados con Apache Spark.</p>
+            <h3>🎯 Características:</h3>
+            <ul>
+                <li>Segmentación de usuarios con K-Means</li>
+                <li>Recomendaciones basadas en clusters</li>
+                <li>Métricas de evaluación: Precision@K y Recall@K</li>
+                <li>Dataset: MovieLens 1M (1,000,000 calificaciones)</li>
+            </ul>
+            <h3>🏷️ Clusters Identificados:</h3>
+            <ul>
+                <li><strong>Cluster 0-1:</strong> Usuarios ocasionales/intermedios</li>
+                <li><strong>Cluster 2-4:</strong> Usuarios activos</li>
+                <li><strong>Cluster 5-7:</strong> Usuarios muy activos</li>
+            </ul>
+            <button class="btn btn-primary" onclick="closeModal()">Cerrar</button>
+        </div>
+    </div>
+
+    <!-- Modal para documentación API -->
+    <div id="docsModal" class="modal">
+        <div class="modal-content">
+            <span class="modal-close" onclick="closeDocsModal()">&times;</span>
+            <h2>📚 Documentación API</h2>
+            <h3>Endpoints disponibles:</h3>
+            <div class="docs-endpoint">
+                <code>GET /health</code>
+                <p>Verificar estado de la API</p>
+                <details>
+                    <summary>Ejemplo respuesta</summary>
+                    <pre>{"status": "ok", "users_loaded": 5}</pre>
+                </details>
+            </div>
+            <div class="docs-endpoint">
+                <code>GET /recommendations/{user_id}</code>
+                <p>Obtener recomendaciones de un usuario específico</p>
+                <details>
+                    <summary>Ejemplo respuesta</summary>
+                    <pre>{"user_id": 1, "cluster": 1, "recommendations": [...]}</pre>
+                </details>
+            </div>
+            <div class="docs-endpoint">
+                <code>GET /recommendations?limit=10&offset=0</code>
+                <p>Obtener todos los usuarios (paginado)</p>
+            </div>
+            <button class="btn btn-primary" onclick="closeDocsModal()">Cerrar</button>
+        </div>
+    </div>
+
+    <script src="js/app.js"></script>
+</body>
+</html>
