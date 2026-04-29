@@ -240,11 +240,13 @@ Las siguientes imágenes muestran resultados del proceso (clusters, métricas y 
 
 ### end point de get para un usuario especifico
 
-![Resultados 1](images/image.png)
+![alt text](images/image.png)
 
 ### end point de get para todos los usuarios
 
-![Resultados 2](images/image-1.png)
+![alt text](images/image-11.png)
+
+![alt text](images/image-1.png)
 
 ### end point de get manejo de errores de not found
 
